@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://pnaxa6eg2qj7"]
+
+[ext_resource type="TileSet" uid="uid://bhb50jvxqjab7" path="res://tile_set_obj.tres" id="1_0e48y"]
+[ext_resource type="Script" uid="uid://dqmlljgf1tq6d" path="res://MapScene.cs" id="1_eobcy"]
+[ext_resource type="Script" uid="uid://c1mbng55qbdm8" path="res://world_map_script.cs" id="2_0e48y"]
+[ext_resource type="Script" uid="uid://b0m8vuf80duna" path="res://Camera2d.cs" id="4_w4tea"]
+
+[node name="main_node" type="Node2D" node_paths=PackedStringArray("world_map")]
+script = ExtResource("1_eobcy")
+world_map = NodePath("world_map")
+
+[node name="world_map" type="TileMapLayer" parent="."]
+position = Vector2(13, 12)
+tile_set = ExtResource("1_0e48y")
+script = ExtResource("2_0e48y")
+tileSet = ExtResource("1_0e48y")
+
+[node name="world_camera" type="Camera2D" parent="."]
+script = ExtResource("4_w4tea")

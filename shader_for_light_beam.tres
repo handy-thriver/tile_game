@@ -1,0 +1,13 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://d0rrk6eeps8d7"]
+
+[ext_resource type="Shader" uid="uid://dsxyk3wqcir66" path="res://shader_for_light_beam.gdshader" id="1_kuv40"]
+
+[resource]
+shader = ExtResource("1_kuv40")
+shader_parameter/x_cordinates = 0.4694
+shader_parameter/x_width = 0.006
+shader_parameter/y_cordinates = 0.3
+shader_parameter/y_width = 0.01
+shader_parameter/intesity = 0.2
+shader_parameter/speed = 0.2
+shader_parameter/limit_y = 0.8

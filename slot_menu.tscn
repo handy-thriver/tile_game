@@ -1,0 +1,114 @@
+[gd_scene load_steps=4 format=3 uid="uid://dsrmjqs5k0xak"]
+
+[ext_resource type="Script" uid="uid://dolhg0hr0w0up" path="res://Slots_initialization.cs" id="1_7jgg7"]
+[ext_resource type="Script" uid="uid://emgh1yd31cat" path="res://slot_menu_control.cs" id="1_7otpx"]
+[ext_resource type="Script" uid="uid://cvm8fu4dl0831" path="res://DeleteSlots.cs" id="3_cqgdo"]
+
+[node name="main_node" type="Control"]
+layout_mode = 3
+anchor_right = 0.928
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = 4.0
+offset_right = 155.944
+offset_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="main_panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="contol_container" type="VBoxContainer" parent="main_panel" node_paths=PackedStringArray("NextButton", "NextDialog", "backButton", "slotOptionButton", "deleteButton", "deleteDialog", "deleteSlotList", "slot_options")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7otpx")
+NextButton = NodePath("Title_container/next_button")
+NextDialog = NodePath("../next_dialog")
+backButton = NodePath("Title_container/back_button")
+slotOptionButton = NodePath("farm_selection_button")
+deleteButton = NodePath("farm_deletion_container/delete_button")
+deleteDialog = NodePath("../delete_dilog")
+deleteSlotList = NodePath("deletion_scrol_bar/delete_slots_list")
+slot_options = NodePath("farm_selection_button")
+
+[node name="Title_container" type="HBoxContainer" parent="main_panel/contol_container"]
+layout_mode = 2
+
+[node name="back_button" type="Button" parent="main_panel/contol_container/Title_container"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 86
+text = "Back"
+
+[node name="Title" type="Label" parent="main_panel/contol_container/Title_container"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 81
+text = "Slot configuration"
+
+[node name="next_button" type="Button" parent="main_panel/contol_container/Title_container"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 86
+text = "Next"
+
+[node name="farm_selection_text" type="Label" parent="main_panel/contol_container"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 42
+text = "choose your farm:"
+
+[node name="farm_selection_button" type="OptionButton" parent="main_panel/contol_container"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme_override_font_sizes/font_size = 41
+script = ExtResource("1_7jgg7")
+
+[node name="farm_deletion_container" type="HBoxContainer" parent="main_panel/contol_container"]
+layout_mode = 2
+
+[node name="farm_deletion_text" type="Label" parent="main_panel/contol_container/farm_deletion_container"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 42
+text = "delete a farm:                                                               "
+
+[node name="delete_button" type="Button" parent="main_panel/contol_container/farm_deletion_container"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 61
+text = "delete
+"
+
+[node name="deletion_scrol_bar" type="VScrollBar" parent="main_panel/contol_container"]
+layout_mode = 2
+size_flags_horizontal = 1
+size_flags_vertical = 3
+
+[node name="delete_slots_list" type="ItemList" parent="main_panel/contol_container/deletion_scrol_bar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+select_mode = 2
+allow_reselect = true
+script = ExtResource("3_cqgdo")
+
+[node name="next_dialog" type="ConfirmationDialog" parent="main_panel"]
+title = "are you sure?"
+position = Vector2i(395, 250)
+size = Vector2i(290, 140)
+
+[node name="delete_dilog" type="ConfirmationDialog" parent="main_panel"]
+title = "are you sure you want to delete this? youwon't be able to retrive them afterword"
+position = Vector2i(260, 290)
+size = Vector2i(690, 100)

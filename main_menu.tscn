@@ -1,0 +1,45 @@
+[gd_scene load_steps=5 format=3 uid="uid://golgwbjkket"]
+
+[ext_resource type="Texture2D" uid="uid://8goncaabwspv" path="res://back_ground image.png" id="1_06t4h"]
+[ext_resource type="Script" uid="uid://b4y0dgo2qelso" path="res://MainMenuScript.cs" id="1_7vrkn"]
+[ext_resource type="Material" uid="uid://d0rrk6eeps8d7" path="res://shader_for_light_beam.tres" id="2_fu7sn"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_06t4h"]
+
+[node name="MainMenuRoot" type="Control" node_paths=PackedStringArray("play_button")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7vrkn")
+play_button = NodePath("main_menu_container/play_button")
+
+[node name="EnergyPulse" type="TextureRect" parent="."]
+material = ExtResource("2_fu7sn")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_top = -7.0
+offset_right = 8.0
+offset_bottom = -7.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_06t4h")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="main_menu_container" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 385.0
+offset_bottom = 644.0
+
+[node name="play_button" type="Button" parent="main_menu_container"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 71
+theme_override_styles/normal = SubResource("StyleBoxEmpty_06t4h")
+text = "play"

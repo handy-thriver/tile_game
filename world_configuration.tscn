@@ -1,0 +1,329 @@
+[gd_scene load_steps=8 format=3 uid="uid://24y7yxmmpjrd"]
+
+[ext_resource type="Script" uid="uid://dxp7faw4hner0" path="res://world_size_configuration.cs" id="1_7rrnu"]
+[ext_resource type="Script" uid="uid://cwdue2tpglcye" path="res://input_configuration_script.cs" id="1_bsclt"]
+[ext_resource type="Script" uid="uid://dcoiemaof4sp0" path="res://button_configuration_script.cs" id="2_bsclt"]
+[ext_resource type="Script" uid="uid://cgpja0krcckri" path="res://radiation_diameter_configuration.cs" id="2_g8o1e"]
+[ext_resource type="Script" uid="uid://cgjo5fgrg21tp" path="res://radiation_values_configuration.cs" id="3_cqxhq"]
+[ext_resource type="Script" uid="uid://ckd1x6x0k5exa" path="res://number_of_material_control.cs" id="3_f3cgj"]
+[ext_resource type="Script" uid="uid://dgnq8ku0u30ys" path="res://preservation_cost_configuration.cs" id="4_o1brg"]
+
+[node name="main_node" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="main_Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="info_container" type="VBoxContainer" parent="main_Panel" node_paths=PackedStringArray("world_width", "world_length", "radiation_diameter_min", "radiation_diameter_max", "radiation_values_min", "radiation_values_max", "preservation_cost_min", "preservation_cost_max", "materials_number", "back_button", "back_confirmation_dialog", "next_button", "next_confirmation_dialog", "slot_name_input")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = -4.0
+offset_right = 2.95605
+offset_bottom = -3.46301
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_bsclt")
+world_width = NodePath("size_container/world_width_input")
+world_length = NodePath("size_container/world_length_input")
+radiation_diameter_min = NodePath("radiation_diameter_container/min_radiation_diameter_range_input")
+radiation_diameter_max = NodePath("radiation_diameter_container/max_radiation_diameter_range_input")
+radiation_values_min = NodePath("radiation_values_container/min_radiation_values_range_input")
+radiation_values_max = NodePath("radiation_values_container/max_radiation_values_range_input")
+preservation_cost_min = NodePath("preservation_cost_container/min_preservation_cost_range_input")
+preservation_cost_max = NodePath("preservation_cost_container/max_preservation_cost_range_input")
+materials_number = NodePath("name_container/number_of_materials_input")
+back_button = NodePath("control_container/back_button")
+back_confirmation_dialog = NodePath("../Back_Dialog")
+next_button = NodePath("control_container/next_Button")
+next_confirmation_dialog = NodePath("../Next_Dialog")
+slot_name_input = NodePath("name_container/world_name_input")
+
+[node name="control_container" type="HBoxContainer" parent="main_Panel/info_container" node_paths=PackedStringArray("NextButton", "BackButton", "NextDialog", "BackDialog")]
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("2_bsclt")
+NextButton = NodePath("next_Button")
+BackButton = NodePath("back_button")
+NextDialog = NodePath("../../Next_Dialog")
+BackDialog = NodePath("../../Back_Dialog")
+
+[node name="back_button" type="Button" parent="main_Panel/info_container/control_container"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 36
+text = "Back"
+
+[node name="Title_label" type="Label" parent="main_Panel/info_container/control_container"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 36
+text = "       world configuration       "
+
+[node name="next_Button" type="Button" parent="main_Panel/info_container/control_container"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 36
+text = "Next"
+
+[node name="VS_label_0" type="Label" parent="main_Panel/info_container"]
+layout_mode = 2
+
+[node name="name_container" type="HBoxContainer" parent="main_Panel/info_container" node_paths=PackedStringArray("number_of_materials")]
+layout_mode = 2
+size_flags_vertical = 2
+script = ExtResource("3_f3cgj")
+number_of_materials = NodePath("number_of_materials_input")
+
+[node name="name_Label" type="Label" parent="main_Panel/info_container/name_container"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 36
+text = "world name :"
+
+[node name="world_name_input" type="LineEdit" parent="main_Panel/info_container/name_container"]
+clip_contents = true
+custom_minimum_size = Vector2(200, 10)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+size_flags_stretch_ratio = 0.71
+theme_override_font_sizes/font_size = 20
+keep_editing_on_text_submit = true
+
+[node name="material_count" type="Label" parent="main_Panel/info_container/name_container"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 36
+text = "         number of materials:"
+
+[node name="number_of_materials_input" type="SpinBox" parent="main_Panel/info_container/name_container"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+rounded = true
+
+[node name="VS_label_1" type="Label" parent="main_Panel/info_container"]
+layout_mode = 2
+
+[node name="size_container" type="HBoxContainer" parent="main_Panel/info_container" node_paths=PackedStringArray("world_width_input", "world_length_input")]
+layout_mode = 2
+size_flags_vertical = 6
+script = ExtResource("1_7rrnu")
+world_width_input = NodePath("world_width_input")
+world_length_input = NodePath("world_length_input")
+
+[node name="width_input_text" type="Label" parent="main_Panel/info_container/size_container"]
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_font_sizes/font_size = 36
+text = "world width"
+
+[node name="world_width_input" type="SpinBox" parent="main_Panel/info_container/size_container"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+rounded = true
+
+[node name="HS_label_0" type="Label" parent="main_Panel/info_container/size_container"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "                         "
+
+[node name="length_input_text" type="Label" parent="main_Panel/info_container/size_container"]
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_font_sizes/font_size = 36
+text = "world length"
+
+[node name="world_length_input" type="SpinBox" parent="main_Panel/info_container/size_container"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+rounded = true
+
+[node name="VS_label_2" type="Label" parent="main_Panel/info_container"]
+layout_mode = 2
+
+[node name="radiation_diameter_container" type="HBoxContainer" parent="main_Panel/info_container" node_paths=PackedStringArray("min_range", "max_range")]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("2_g8o1e")
+min_range = NodePath("min_radiation_diameter_range_input")
+max_range = NodePath("max_radiation_diameter_range_input")
+
+[node name="radiation_diameter_text" type="Label" parent="main_Panel/info_container/radiation_diameter_container"]
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_font_sizes/font_size = 36
+text = "radiation diameter range:"
+
+[node name="HS_label_1" type="Label" parent="main_Panel/info_container/radiation_diameter_container"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "                "
+
+[node name="min_diameter_input_text" type="Label" parent="main_Panel/info_container/radiation_diameter_container"]
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_font_sizes/font_size = 36
+text = "min"
+
+[node name="min_radiation_diameter_range_input" type="SpinBox" parent="main_Panel/info_container/radiation_diameter_container"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+rounded = true
+
+[node name="HS_label_2" type="Label" parent="main_Panel/info_container/radiation_diameter_container"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "                   "
+
+[node name="max_diameter_input_text" type="Label" parent="main_Panel/info_container/radiation_diameter_container"]
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_font_sizes/font_size = 36
+text = "max"
+
+[node name="max_radiation_diameter_range_input" type="SpinBox" parent="main_Panel/info_container/radiation_diameter_container"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = 1.0
+value = 1.0
+rounded = true
+
+[node name="VS_label_3" type="Label" parent="main_Panel/info_container"]
+layout_mode = 2
+
+[node name="radiation_values_container" type="HBoxContainer" parent="main_Panel/info_container" node_paths=PackedStringArray("MaxRadiationValue", "MinRadiationValue")]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("3_cqxhq")
+MaxRadiationValue = NodePath("max_radiation_values_range_input")
+MinRadiationValue = NodePath("min_radiation_values_range_input")
+
+[node name="radiation_values_text" type="Label" parent="main_Panel/info_container/radiation_values_container"]
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_font_sizes/font_size = 36
+text = "radiation values range:"
+
+[node name="HS_label_3" type="Label" parent="main_Panel/info_container/radiation_values_container"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "                            "
+
+[node name="min_radiation_values_input_text" type="Label" parent="main_Panel/info_container/radiation_values_container"]
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_font_sizes/font_size = 36
+text = "min"
+
+[node name="min_radiation_values_range_input" type="SpinBox" parent="main_Panel/info_container/radiation_values_container"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = -20.0
+max_value = -1.0
+value = -1.0
+
+[node name="HS_label_4" type="Label" parent="main_Panel/info_container/radiation_values_container"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "                   "
+
+[node name="max_radiation_values_input_text" type="Label" parent="main_Panel/info_container/radiation_values_container"]
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_font_sizes/font_size = 36
+text = "max"
+
+[node name="max_radiation_values_range_input" type="SpinBox" parent="main_Panel/info_container/radiation_values_container"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="VS_label_4" type="Label" parent="main_Panel/info_container"]
+layout_mode = 2
+
+[node name="preservation_cost_container" type="HBoxContainer" parent="main_Panel/info_container" node_paths=PackedStringArray("max_preservation_cost", "min_preservation_cost")]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("4_o1brg")
+max_preservation_cost = NodePath("max_preservation_cost_range_input")
+min_preservation_cost = NodePath("min_preservation_cost_range_input")
+
+[node name="preservation_cost_range_text" type="Label" parent="main_Panel/info_container/preservation_cost_container"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 36
+text = "preservation cost range:"
+
+[node name="HS_label_5" type="Label" parent="main_Panel/info_container/preservation_cost_container"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "                   "
+
+[node name="min_preservation_cost_input_text" type="Label" parent="main_Panel/info_container/preservation_cost_container"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 36
+text = "min"
+
+[node name="min_preservation_cost_range_input" type="SpinBox" parent="main_Panel/info_container/preservation_cost_container"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+step = 0.01
+
+[node name="HS_label6" type="Label" parent="main_Panel/info_container/preservation_cost_container"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "                   "
+
+[node name="max_preservation_cost_input_text" type="Label" parent="main_Panel/info_container/preservation_cost_container"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 36
+text = "max"
+
+[node name="max_preservation_cost_range_input" type="SpinBox" parent="main_Panel/info_container/preservation_cost_container"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+
+[node name="Next_Dialog" type="ConfirmationDialog" parent="main_Panel"]
+title = "do you rally want to procceed?"
+position = Vector2i(460, 325)
+size = Vector2i(305, 100)
+
+[node name="Back_Dialog" type="ConfirmationDialog" parent="main_Panel"]
+auto_translate_mode = 1
+title = "do you rally want to go back?"
+position = Vector2i(460, 325)
+size = Vector2i(286, 100)
