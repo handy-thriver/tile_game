@@ -35,6 +35,9 @@ public partial class input_configuration_script : VBoxContainer
     Dictionary<string, object> WorldConfigurationVariables = new Dictionary<string, object>();
     public override void _Ready()
     {
+        //while I could have used just normal public variables
+        //I thought a dictionary would be more flexible and if I need to save it 
+        //to a json file it would be easier to do so
         WorldConfigurationVariables = new Dictionary<string, object>()
         {
             { "worldWidth", world_width.Value},
@@ -114,6 +117,9 @@ public partial class input_configuration_script : VBoxContainer
     }
     public void globlize_change()
     {
+        //this the most important function in ths script as communication between
+        //the input configuration script and the rest of the game is done through this
+        //function, it updates the NameState singleton with the values from the dictionary
         NameState.Instance.materialLimits = new material_limits(
             (int)(double)WorldConfigurationVariables["radiationDiameterMin"],
             (int)(double)WorldConfigurationVariables["radiationDiameterMax"],
@@ -136,6 +142,8 @@ public partial class input_configuration_script : VBoxContainer
             { "width", NameState.Instance.width },
             { "length", NameState.Instance.length }
         };
+        // Serialize the slot data to JSON and save it to a file
+        //this file will be used to create the text in deleetion and choose slot UIs
         string slotPath = System.IO.Path.Combine(NameState.Instance.global_path,
          "Slot_" + NameState.Instance.slot_ID.ToString(), "slot_data.json");
         System.IO.Directory.CreateDirectory(System.IO.Path.GetDirectoryName(slotPath));

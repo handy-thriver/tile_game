@@ -141,6 +141,4 @@ public class world_map_script_file_manager()
 
         return worldMap;
     } 
-
-        // Serialize 
 }

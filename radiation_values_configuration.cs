@@ -1,7 +1,12 @@
 using Godot;
 using System;
 using System.Collections.Generic;
-
+//this a general note about input configurations
+//any update that must be done in here should take into account some limitations
+//like general coherance of the values and the fact that Program.cs
+//while get most of the limitations from here
+//it still use direct values when generating energy values when changing materials
+//so always check that the values are coherent with the ones in Program.cs
 public partial class radiation_values_configuration : HBoxContainer
 {
     [Export]
@@ -60,10 +65,10 @@ public partial class radiation_values_configuration : HBoxContainer
         }
         if (value > MinRadiationValue.MaxValue)
         {
-            GD.PrintErr("MinRadiationValue exceeds its maximum limit.",MinRadiationValue.MaxValue);
+            GD.PrintErr("MinRadiationValue exceeds its maximum limit.", MinRadiationValue.MaxValue);
             MinRadiationValue.Value = MinRadiationValue.MaxValue;
         }
     }
 
-    
+
 }

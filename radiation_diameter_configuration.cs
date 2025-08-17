@@ -26,6 +26,9 @@ public partial class radiation_diameter_configuration : HBoxContainer
         max_range.MinValue = SizeLimits["minDiameter"];
         min_range.Step = SizeLimits["step"];
         max_range.Step = SizeLimits["step"];
+        // Connect signals to ensure the limitations are respected and there is no logic error
+        //like min_range being greater than max_range or vice versa
+        //this cummon thing in all range configurations
         min_range.ValueChanged += update_min_range;
         max_range.ValueChanged += update_max_range;
     }
